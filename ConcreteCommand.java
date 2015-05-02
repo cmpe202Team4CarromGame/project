@@ -1,19 +1,25 @@
 import greenfoot.*;
 
-public class ConcreteCommand extends Actor
+public class ConcreteCommand extends Actor implements Command
 {
     
     
-    Command buttonClick;
+    Receiver buttonClick;
     
     public ConcreteCommand(){
     
     }
    
-    public void setCommand(Command command)
+    public void setReceiver(Receiver target)
     {
-        this.buttonClick=command;
-         buttonClick.execute();
+        this.buttonClick=target;
+//         buttonClick.execute();
+    
+    }
+    
+    public void execute()
+    {
+        buttonClick.doAction();
     
     }
  

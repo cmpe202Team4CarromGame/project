@@ -25,8 +25,10 @@ public class OptionsWorld extends World
          
          if(x>240 && x <550 && y>350 && y<400 )
          {
-            ConcreteCommand cmd = new ConcreteCommand();
-            cmd.setCommand(new PlayButton());
+             Command optioncmd = new ConcreteCommand();
+             HomeScreen optionScreen = new HomeScreen();
+             optioncmd.setReceiver(new PlayButton());
+             optionScreen.setCommand(optioncmd);  
             
           }
         

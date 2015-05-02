@@ -4,6 +4,7 @@ public class HomeScreen extends World
 {
 
     MouseInfo mouse;
+    Command cmd;
     
     public HomeScreen()
     {    
@@ -21,29 +22,43 @@ public class HomeScreen extends World
        
     }
     
-    void setNew(int x, int y) {
+    void setCommand(Command cmd)
+    {
+        
+        this.cmd=cmd;
+        invoke();
+    
+    
+    }
+    public void invoke(){
+    
+    cmd.execute();
+    }
+    
+   
+/*   void setNew(int x, int y) {
          
          if(x>160 && x <450 && y>185 && y<216 )
          {
-            ConcreteCommand cmd = new ConcreteCommand();
-            cmd.setCommand(new PlayButton());
+            Command cmd = new ConcreteCommand();
+            cmd.setReceiver(new PlayButton());
            
           }
            
          if(x>=160 && x<=450 && y>260 && y<294)
          {
-            ConcreteCommand cmd = new ConcreteCommand();
-            cmd.setCommand(new OptionButton());
+            Command cmd = new ConcreteCommand();
+            cmd.setReceiver(new OptionButton());
            
           } 
           if(x>160 && x<450 && y>=340 && y<=375)
          {
-            ConcreteCommand cmd = new ConcreteCommand();
-            cmd.setCommand(new ExitButton());
+            Command cmd = new ConcreteCommand();
+            cmd.setReceiver(new ExitButton());
            
           }
            
-        }
+        }*/
     }
 
 

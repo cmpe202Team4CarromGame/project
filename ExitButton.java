@@ -1,7 +1,7 @@
 import greenfoot.*;
 
 
-public class ExitButton extends Actor implements Command
+public class ExitButton extends Actor implements Receiver
 {
     private GreenfootImage exit = new GreenfootImage("ExitButton.png");
 
@@ -17,15 +17,16 @@ public class ExitButton extends Actor implements Command
             MouseInfo m=Greenfoot.getMouseInfo();    
             int x=m.getX();
             int y=m.getY();
-            HomeScreen hs=new HomeScreen();
-            hs.setNew(x, y);
+            InitialWorld initialworld = new InitialWorld();
+            OptionsWorld op = new OptionsWorld();
+            initialworld.selectButton(x,y);
         }
     }
     
     
     
     
-    public void execute()
+    public void doAction()
     {
     
       Greenfoot.stop();

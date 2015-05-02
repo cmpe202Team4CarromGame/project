@@ -1,8 +1,5 @@
-
-
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  
 import java.util.List;
-
 
 public class Board extends World
 {
@@ -206,20 +203,26 @@ public class Board extends World
                 else
                 {
                      Striker currentPlayer= getActualStriker();
-                    if(coinCollected)
-                       { /*addObject(new GoldMarble(), 320, 480);*/ currentPlayer.setDefaultLocation(Greenfoot.getMouseInfo());}
+                       if(coinCollected)
+                       {   
+                           /*addObject(new GoldMarble(), 320, 480);*/
+                           currentPlayer.setDefaultLocation(Greenfoot.getMouseInfo());
+                           
+                       }
                     else
-                        { /*addObject(new GoldMarble(), 320, 480);*/
+                        {  
+                            /*addObject(new GoldMarble(), 320, 480);*/
                             lastplayernumber=currentPlayer.getPlayerNumber();
                             removeObject(currentPlayer);
                             int playerNumber=currentPlayer.getPlayerNumber();
+                           
                             switch(playerNumber)
                             {
                                 case 1: addObject ( new Striker(2),320,150);break;
                                 case 2: addObject ( new Striker(1),320,480);break;
                                 default: addObject ( new Striker(1),320,480);break;
                             }
-                        }//addObject(new GoldMarble(), 320, 150);
+                        }        //addObject(new GoldMarble(), 320, 150);
                   coinCollected=false;
                   currentPlayer= getActualStriker();
                 }
@@ -227,9 +230,7 @@ public class Board extends World
         }
     }
 
-    /**
-     * Record that a roll has been completed.
-     */
+    
     public void countRoll(int playerNumber)
     {
         if(playerNumber==1)
@@ -244,9 +245,6 @@ public class Board extends World
         }
      }
 
-    /**
-     * A steel marble dropped off the board.
-     */
     public void steelCoinDropped(String name)
     {
       //  String coinType = getObjects (Coin.class).size();
@@ -277,10 +275,7 @@ public class Board extends World
         //addScore(10,getActualStriker().getPlayerNumber());
         
     }
-    
-    /**
-     * The gold marble dropped off the board.
-     */
+
     public void strikerDropped()
     {
         // nothing to do - we wait until all movement has stopped before doing anything
@@ -288,9 +283,6 @@ public class Board extends World
         addScore(-10,getActualStriker().getPlayerNumber());
     }
     
-    /**
-     * Check whether the board has been cleared.
-     */
     private boolean isBoardClear()
     {
         int coins = getObjects (Coin.class).size();
@@ -309,7 +301,7 @@ public class Board extends World
     }
     
     /**
-     * Check whether we still have the gold marble on the board.
+     * Check whether we still have the Striker on the board.
      */
     private boolean haveStriker()
     {
@@ -372,11 +364,16 @@ public class Board extends World
     public void gameOver(String message) 
     {
         if(score1<=score)
-            addObject (new ScoreBoard(message, score), 320, getHeight()/2);
+           { 
+               addObject (new ScoreBoard(message, score), 320, getHeight()/2);
+               Greenfoot.delay(100);
+           }
          else
-            addObject (new ScoreBoard(message, score1), 320, getHeight()/2);
-            
-        Greenfoot.stop();
+            {
+                addObject (new ScoreBoard(message, score1), 320, getHeight()/2);
+                Greenfoot.delay(100);
+            }
+        Greenfoot.setWorld(new HomeScreen());
     }
 
     /**

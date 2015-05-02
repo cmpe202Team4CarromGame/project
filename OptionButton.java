@@ -1,7 +1,7 @@
 import greenfoot.*;
 
 
-public class OptionButton extends Actor implements Command
+public class OptionButton extends Actor implements Receiver
 {
   private GreenfootImage options = new GreenfootImage("options.png");
   
@@ -15,12 +15,15 @@ public class OptionButton extends Actor implements Command
             MouseInfo m=Greenfoot.getMouseInfo();    
             int x=m.getX();
             int y=m.getY();
-            HomeScreen hs=new HomeScreen();
-            hs.setNew(x, y);
+            InitialWorld initialworld = new InitialWorld();
+            OptionsWorld op = new OptionsWorld();
+           // hs.setNew(x, y);
+            initialworld.selectButton(x,y);
+           
         }
     }
    
-    public void execute()
+    public void doAction()
     {
     
       Greenfoot.setWorld(new OptionsWorld());
