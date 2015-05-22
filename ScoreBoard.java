@@ -22,7 +22,6 @@ public class ScoreBoard extends Actor
     public ScoreBoard()
     {
         this(100);
-       
     }
 
     /**

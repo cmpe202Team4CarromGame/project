@@ -1,32 +1,51 @@
 import greenfoot.*;
 
-
-public class OptionButton extends Actor implements Receiver
+/**
+ * Write a description of class OpenButton here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class OptionButton extends Actor implements Command
 {
+  int boardNumber;
+   
   private GreenfootImage options = new GreenfootImage("options.png");
-  
-  public OptionButton() {
+  private boolean mouseDown;
+     
+    public OptionButton() {
+        
+       // this.board=board;
+        this.boardNumber=1;
+      
         setImage(options);
-   }
+      
+        mouseDown = false;
+    }
+    
+    
  
-   public void act() {
+    public void act() {
          
         if (Greenfoot.mouseClicked(this)) {
             MouseInfo m=Greenfoot.getMouseInfo();    
             int x=m.getX();
             int y=m.getY();
-            InitialWorld initialworld = new InitialWorld();
-            OptionsWorld op = new OptionsWorld();
-           // hs.setNew(x, y);
-            initialworld.selectButton(x,y);
-           
+            HomeScreen hs=new HomeScreen();
+            
+            System.out.println("This is y"+y);
+            
+            hs.setNew(x, y);
         }
     }
-   
-    public void doAction()
+    
+    
+    
+    
+    public void execute()
     {
     
-      Greenfoot.setWorld(new OptionsWorld());
+       // board.setUp(boardNumber);
     
     }
 }

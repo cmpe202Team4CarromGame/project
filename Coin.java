@@ -187,18 +187,15 @@ public class Coin extends SmoothMover
             
         int whiteCoinCount=board.getWhiteCoinCount();
         int blackCoinCount=board.getBlackCoinCount();
-        int strikerCount=board.getStrikerCount();
-        int queenCount=board.getQueenCount();
             
         int xcordinate=this.getX();
         int ycordinate=this.getY();
             
-         board.removeObject(this);
+            board.removeObject(this);
             
          int whiteCoinCount1=whiteCoinCount-board.getWhiteCoinCount();
-         int blackCoinCount1=blackCoinCount-board.getBlackCoinCount();
-         int strikerCount1=strikerCount-board.getStrikerCount();
-         int queenCount1=queenCount-board.getQueenCount();
+        int blackCoinCount1=blackCoinCount-board.getBlackCoinCount();
+        
         
         String name="none";
             
@@ -206,11 +203,6 @@ public class Coin extends SmoothMover
             {name="White";}
         if(blackCoinCount1>0)
             {name="Black";}
-        if(strikerCount1>0)
-            {name="Striker";}
-        if(queenCount1>0)
-            {name="Queen";}
-        
         
             hasDropped(name,board,xcordinate,ycordinate);
             
@@ -234,11 +226,7 @@ public class Coin extends SmoothMover
         int x = Math.max (xcordinate, 50);
         int y = Math.max (ycordinate, 40);
         y = Math.min (y, board.getHeight()-40);
-        
-        if(coinType=="Queen")
-            board.addObject (new Points("100"), x, y);
-        else
-            board.addObject (new Points("10"), x, y);
+        board.addObject (new Points("10"), x, y);
     }
     
     /**

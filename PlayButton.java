@@ -1,34 +1,42 @@
 import greenfoot.*;
 
 
-public class PlayButton extends Actor implements Receiver
+public class PlayButton extends Actor implements Command
 {
+    int boardNumber;
     private GreenfootImage play = new GreenfootImage("play_now_button.png");
+    private boolean mouseDown;
      
     public PlayButton() {
+        
+   
+        this.boardNumber=1;
         setImage(play);
-       
+        
+        
     }
     
     public void act() {
        
+        
+        
         if (Greenfoot.mouseClicked(this)) {
             MouseInfo m=Greenfoot.getMouseInfo();    
             int x=m.getX();
             int y=m.getY();
-           // HomeScreen hs=new HomeScreen();
-            InitialWorld initialworld = new InitialWorld();
-            OptionsWorld op = new OptionsWorld();
-           // hs.setNew(x, y);
-            initialworld.selectButton(x,y);
-            op.setNew(300,375);
-           
+            HomeScreen hs=new HomeScreen();
+            
+            System.out.println("This is y"+y);
+            
+            hs.setNew(x, y);
             
         }
         
     }
-
-    public void doAction()
+       
+    
+  
+    public void execute()
     {
         Greenfoot.setWorld(new Board());
     }

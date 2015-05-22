@@ -4,16 +4,15 @@ public class HomeScreen extends World
 {
 
     MouseInfo mouse;
-    Command cmd;
     
     public HomeScreen()
     {    
         
         super(600, 400, 1);
-        setBackground("background.png");
-        addObject(new PlayButton(),300,200);
-        addObject(new OptionButton(),300,280);
-        addObject(new ExitButton(),300,360);
+        setBackground("HomeScreen.png");
+        addObject(new PlayButton(),300,50);
+        addObject(new OptionButton(),300,150);
+        addObject(new ExitButton(),300,300);
        
     }
     
@@ -22,43 +21,30 @@ public class HomeScreen extends World
        
     }
     
-    void setCommand(Command cmd)
-    {
-        
-        this.cmd=cmd;
-        invoke();
-    
-    
-    }
-    public void invoke(){
-    
-    cmd.execute();
-    }
-    
-   
-/*   void setNew(int x, int y) {
+    void setNew(int x, int y) {
          
-         if(x>160 && x <450 && y>185 && y<216 )
+         if(x>200 && x <400 && y>20 && y<80 )
          {
-            Command cmd = new ConcreteCommand();
-            cmd.setReceiver(new PlayButton());
-           
+            ConcreteCommand cmd = new ConcreteCommand();
+            cmd.setCommand(new PlayButton());
+            System.out.println("there");
           }
            
-         if(x>=160 && x<=450 && y>260 && y<294)
+         if(x>=250 && x<=365 && y>115 && y<200)
          {
-            Command cmd = new ConcreteCommand();
-            cmd.setReceiver(new OptionButton());
-           
+            ConcreteCommand cmd = new ConcreteCommand();
+            cmd.setCommand(new OptionButton());
+            System.out.println("there11");
           } 
-          if(x>160 && x<450 && y>=340 && y<=375)
+          if(x>238 && x<361 && y>=260 && y<=345)
          {
-            Command cmd = new ConcreteCommand();
-            cmd.setReceiver(new ExitButton());
-           
+            ConcreteCommand cmd = new ConcreteCommand();
+            cmd.setCommand(new ExitButton());
+            System.out.println("there112");
           }
-           
-        }*/
+            System.out.println(x);
+            System.out.println(y);
+        }
     }
 
 

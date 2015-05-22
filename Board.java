@@ -1,5 +1,8 @@
-import greenfoot.*;  
+
+
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
+
 
 public class Board extends World
 {
@@ -139,14 +142,14 @@ public class Board extends World
             Coin striker = getStriker();
             
             if ( striker != null) {
-              //  addObject (new Points ("200"), striker.getX()+70, striker.getY()-30);
+                addObject (new Points ("200"), striker.getX()+70, striker.getY()-30);
                 Greenfoot.playSound("ping.wav");
               //  addScore (300 + rolls*300); // 100 for clearing the board 
                                            // 200 for gold marble still on it,
                                            // plus 300 per unused roll
             }
             else {
-               // addScore (100 + rolls*300,getActualStriker().getPlayerNumber()); // 100 for clearing the board
+                addScore (100 + rolls*300,getActualStriker().getPlayerNumber()); // 100 for clearing the board
                                             // plus 300 per unused roll
             }
             cleared = false;
@@ -203,26 +206,20 @@ public class Board extends World
                 else
                 {
                      Striker currentPlayer= getActualStriker();
-                       if(coinCollected)
-                       {   
-                           /*addObject(new GoldMarble(), 320, 480);*/
-                           currentPlayer.setDefaultLocation(Greenfoot.getMouseInfo());
-                           
-                       }
+                    if(coinCollected)
+                       { /*addObject(new GoldMarble(), 320, 480);*/ currentPlayer.setDefaultLocation(Greenfoot.getMouseInfo());}
                     else
-                        {  
-                            /*addObject(new GoldMarble(), 320, 480);*/
+                        { /*addObject(new GoldMarble(), 320, 480);*/
                             lastplayernumber=currentPlayer.getPlayerNumber();
                             removeObject(currentPlayer);
                             int playerNumber=currentPlayer.getPlayerNumber();
-                           
                             switch(playerNumber)
                             {
                                 case 1: addObject ( new Striker(2),320,150);break;
                                 case 2: addObject ( new Striker(1),320,480);break;
                                 default: addObject ( new Striker(1),320,480);break;
                             }
-                        }        //addObject(new GoldMarble(), 320, 150);
+                        }//addObject(new GoldMarble(), 320, 150);
                   coinCollected=false;
                   currentPlayer= getActualStriker();
                 }
@@ -230,7 +227,9 @@ public class Board extends World
         }
     }
 
-    
+    /**
+     * Record that a roll has been completed.
+     */
     public void countRoll(int playerNumber)
     {
         if(playerNumber==1)
@@ -245,29 +244,21 @@ public class Board extends World
         }
      }
 
+    /**
+     * A steel marble dropped off the board.
+     */
     public void steelCoinDropped(String name)
     {
       //  String coinType = getObjects (Coin.class).size();
       //String name="s";
-     // System.out.println("In steel coin dropped "+name);
+      System.out.println("In steel coin dropped "+name);
       
       if((name=="White" && getActualStriker().getPlayerNumber()==1)||(name=="Black" && getActualStriker().getPlayerNumber()==2))
       {
           addScore(10,getActualStriker().getPlayerNumber());
           coinCollected=true;
       }
-      else if(name=="Striker")
-      {
-          addScore(-10,lastplayernumber);
-          coinCollected=true;
-      }
-      else if(name=="Queen")
-      {
-          addScore(100,getActualStriker().getPlayerNumber());
-          coinCollected=true;
-      }
-      
-       else
+      else
       {
           addScore(-10,getActualStriker().getPlayerNumber());
           coinCollected=true;
@@ -275,7 +266,10 @@ public class Board extends World
         //addScore(10,getActualStriker().getPlayerNumber());
         
     }
-
+    
+    /**
+     * The gold marble dropped off the board.
+     */
     public void strikerDropped()
     {
         // nothing to do - we wait until all movement has stopped before doing anything
@@ -283,25 +277,18 @@ public class Board extends World
         addScore(-10,getActualStriker().getPlayerNumber());
     }
     
+    /**
+     * Check whether the board has been cleared.
+     */
     private boolean isBoardClear()
     {
         int coins = getObjects (Coin.class).size();
         int striker = getObjects (Striker.class).size();
-        
-        boolean flag=false;
-        
-        if(coins - striker == 0)
-            flag=true;
-        else if(getBlackCoinCount()==0 && getQueenCount()==0)
-            flag=true;
-        else if(getWhiteCoinCount()==0 && getQueenCount()==0)
-            flag=true;
-            
-        return flag;
+        return coins - striker == 0;
     }
     
     /**
-     * Check whether we still have the Striker on the board.
+     * Check whether we still have the gold marble on the board.
      */
     private boolean haveStriker()
     {
@@ -363,17 +350,8 @@ public class Board extends World
      */
     public void gameOver(String message) 
     {
-        if(score1<=score)
-           { 
-               addObject (new ScoreBoard(message, score), 320, getHeight()/2);
-               Greenfoot.delay(100);
-           }
-         else
-            {
-                addObject (new ScoreBoard(message, score1), 320, getHeight()/2);
-                Greenfoot.delay(100);
-            }
-        Greenfoot.setWorld(new HomeScreen());
+        addObject (new ScoreBoard(message, score), 320, getHeight()/2);
+        Greenfoot.stop();
     }
 
     /**
@@ -525,15 +503,9 @@ public class Board extends World
         return  getObjects (WhiteCoin.class).size();
     }
     
-    public int getStrikerCount()
+    public String isCoinDropped(String name)
     {
-        return  getObjects (Striker.class).size();
+        return name;
     }
-    
-      public int getQueenCount()
-    {
-        return  getObjects (QueenCoin.class).size();
-    }
-    
     
 }
